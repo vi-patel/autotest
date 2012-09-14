@@ -42,6 +42,28 @@ def start_vdagent(guest_session, test_timeout):
     wait_timeout(30)
 
 
+def restart_vdagent(guest_session, test_timeout):
+    """
+    Sending commands to restart the spice-vdagentd service
+
+    @param guest_session: ssh session of the VM
+    @param test_timeout: timeout time for the cmds
+    """
+    cmd = "service spice-vdagentd restart"
+    try:
+        guest_session.cmd(cmd, print_func=logging.info,
+                                   timeout=test_timeout)
+    except ShellCmdError:
+        raise error.TestFail("Couldn't restart spice vdagent process")
+    except:
+        raise error.TestFail("Guest Vdagent Daemon Check failed")
+
+    logging.debug("------------ End of Spice Vdagent"
+                     " Daemon  Restart ------------")
+    #Wait for vdagent to come up
+    wait_timeout(30)
+
+
 def stop_vdagent(guest_session, test_timeout):
     """
     Sending commands to stop the spice-vdagentd service
