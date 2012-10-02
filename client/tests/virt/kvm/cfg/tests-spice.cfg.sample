@@ -353,10 +353,10 @@ variants:
     - Remote_Viewer_Test:
         only remote_viewer_rhel63_quick
     - Remote_Viewer_FullScreen_Test:
-        full_screen = "True"
+        full_screen = yes
         only rv_fullscreen_rhel63
     - Remote_Viewer_FullScreen_Test_NEG:
-        full_screen = "False"
+        full_screen = no
         only rv_fullscreen_rhel63
     - Remote_Viewer_WinGuest_Test:
         only remote_viewer_win_guest_quick
