@@ -162,7 +162,7 @@ def launch_rv(client_vm, guest_vm, params):
         raise Exception("Unsupported display value")
 
     # Check to see if the test is using the full screen option.
-    if full_screen == "True":
+    if full_screen == "yes":
         logging.info("Remote Viewer Set to use Full Screen")
         cmd += " --full-screen"
 
