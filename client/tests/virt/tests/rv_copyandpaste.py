@@ -738,10 +738,10 @@ def run_rv_copyandpaste(test, params, env):
 
     client_session.cmd("export DISPLAY=:0.0")
 
-    try:
-        guest_session.cmd("startx &")
-    except:
-        logging.debug("Ignoring an Exception that Occurs from calling startx")
+   # try:
+   #     guest_session.cmd("startx &")
+   # except:
+   #     logging.debug("Ignoring an Exception that Occurs from calling startx")
     # Wait for X session to start
     wait_timeout()
     guest_session.cmd("export DISPLAY=:0.0")
