@@ -2624,7 +2624,6 @@ variants:
         virtio_port_chardev_vm1 = "spicevmc"
         virtio_port_name_prefix_vm1 = "com.redhat.spice."
 
-
         variants:
             - RHEL:
                 variants:
@@ -2643,12 +2642,11 @@ variants:
         image_name_vm2 = client_vm
         display_vm2 = vnc
         vga_vm2 = cirrus
-        full_screen = "False"
+        full_screen = no
         virtio_ports_vm1 = "vdagent"
         virtio_port_type_vm1 = "serialport"
         virtio_port_chardev_vm1 = "spicevmc"
         virtio_port_name_prefix_vm1 = "com.redhat.spice."
-
 
         variants:
             - RHEL:
@@ -2801,7 +2799,6 @@ variants:
         virtio_port_type_vm1 = "serialport"
         virtio_port_chardev_vm1 = "spicevmc"
         virtio_port_name_prefix_vm1 = "com.redhat.spice."
-
 
         variants:
             - RHEL:
