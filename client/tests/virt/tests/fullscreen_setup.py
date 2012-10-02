@@ -10,16 +10,6 @@ import logging, time
 from virttest import utils_spice
 
 
-def wait_timeout(timeout=10):
-    """
-    Wait timeout is a method for the test to wait
-
-    @param timeout=10
-    """
-    logging.debug("Waiting (timeout=%ss)", timeout)
-    time.sleep(timeout)
-
-
 def run_fullscreen_setup(test, params, env):
     """
     Simple test for Remote Desktop connection
@@ -40,13 +30,14 @@ def run_fullscreen_setup(test, params, env):
     guest_session = guest_vm.wait_for_login(
             timeout=int(params.get("login_timeout", 360)))
 
+    logging.debug("Exporting guest display")
     guest_session.cmd("export DISPLAY=:0.0")
     try:
         guest_session.cmd("startx &")
     except:
         logging.debug("Ignoring an Exception that Occurs from calling startx")
-    # Wait for X session to start
-    wait_timeout()
+    # Sleep while X session starts
+    utils_spice.wait_timeout()
 
     # Get the min, current, and max resolution on the guest
     output = guest_session.cmd("xrandr | grep Screen")
@@ -55,12 +46,14 @@ def run_fullscreen_setup(test, params, env):
     MINindex = outputlist.index("minimum")
     minimum = outputlist[MINindex + 1]
     minimum += outputlist[MINindex + 2]
-    minimum += outputlist[MINindex + 3]
+    # Remove trailing comma
+    minimum += outputlist[MINindex + 3].replace(",","")
 
     CURRENTindex = outputlist.index("current")
     current = outputlist[CURRENTindex + 1]
     current += outputlist[CURRENTindex + 2]
-    current += outputlist[CURRENTindex + 3]
+    # Remove trailing comma
+    current += outputlist[CURRENTindex + 3].replace(",", "")
 
     MAXindex = outputlist.index("maximum")
     maximum = outputlist[MAXindex + 1]
